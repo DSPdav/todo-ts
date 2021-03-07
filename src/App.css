@@ -21,6 +21,22 @@ button[type="submit"] {
     justify-self: self-end;
     width: 55px;
 }
+.filter-display {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0 0;
+}
+.filter-display div {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto auto auto;
+    gap: .25rem;
+}
+button#clear-btn {
+    width: 55px;
+}
 .display-item {
     display: flex;
     justify-content: space-between;
