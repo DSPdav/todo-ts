@@ -11,8 +11,8 @@ type InputProps = {
 function Input({idText, labelText, inputType, valueInput, handleChange}: InputProps) {
   return (
     <>
-        <label htmlFor={idText}>{labelText}</label>
-        <input id={idText} type={inputType} value={valueInput} onChange={e => handleChange(e)}/>
+      <label htmlFor={idText}>{labelText}</label>
+      <input id={idText} type={inputType} value={valueInput} onChange={e => handleChange(e)}/>
     </>
   );
 }

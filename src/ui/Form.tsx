@@ -19,7 +19,7 @@ function Form({list, setList}: FormProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setList([...list, {content: newToDo, date}])
+    setList([...list, {id: Date.now(), content: newToDo, date, done: false}])
     setNewToDo('');
     setDate('');
   }
@@ -27,7 +27,7 @@ function Form({list, setList}: FormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input idText="todo" inputType="text" labelText="To do" valueInput={newToDo} handleChange={handleChangeToDo}/>
+      <Input idText="todo" inputType="text" labelText="To Do" valueInput={newToDo} handleChange={handleChangeToDo}/>
       <Input idText="date" inputType="date" labelText="Date" valueInput={date} handleChange={handleChangeDate}/>
       <button type="submit">Add</button>
     </form>
