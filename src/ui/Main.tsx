@@ -48,7 +48,7 @@ function Main() {
   }, [listToDo])
 
   return (
-    <main className="main-content">
+    <main data-testid="main" className="main-content">
       <Form list={listToDo} setList={setListToDo}/>
       <div className="filter-display">
         <div>

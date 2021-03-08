@@ -1,11 +1,11 @@
 import React from 'react';
 
 type InputProps = {
-    idText: string
-    labelText: string
-    inputType: string
-    valueInput: string
-    handleChange: any
+  idText: string
+  labelText: string
+  inputType: string
+  valueInput: string
+  handleChange: Function
 }
 
 function Input({idText, labelText, inputType, valueInput, handleChange}: InputProps) {

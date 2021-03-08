@@ -2,8 +2,8 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="footer">
-        <p>&copy; 2021</p>
+    <footer data-testid="footer" className="footer">
+      <p>&copy; 2021</p>
     </footer>
   );
 }

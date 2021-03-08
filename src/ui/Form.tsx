@@ -17,7 +17,7 @@ function Form({list, setList}: FormProps) {
     setDate(e.currentTarget.value);
   }
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     setList([...list, {id: Date.now(), content: newToDo, date, done: false}])
     setNewToDo('');
