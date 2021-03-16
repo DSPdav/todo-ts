@@ -1,8 +1,31 @@
 import React from 'react';
 
-import Form from './Form'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import Form from './Form';
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      margin: '1rem 0',
+    },
+  }),
+);
 
 function Main() {
+  const classes = useStyles();
   const initialState: Array<{id: string, content: string, date: string, done: boolean}> = [];
   const [listToDo, setListToDo] = React.useState(initialState);
   const [show, setShow] = React.useState({done: true, onProgress: true});
@@ -48,25 +71,42 @@ function Main() {
   }, [listToDo])
 
   return (
-    <main data-testid="main" className="main-content">
+    <main>
       <Form list={listToDo} setList={setListToDo}/>
-      <div className="filter-display">
-        <div>
-          <input type="checkbox" id="showDone" checked={show.done} onChange={() => setShow({...show, done: !show.done})}/>
-          <label htmlFor="showDone">Done</label>
-          <input type="checkbox" id="showOnProgress" checked={show.onProgress} onChange={() => setShow({...show, onProgress: !show.onProgress})}/>
-          <label htmlFor="showOnProgress">On Progress</label>
-        </div>
-        <button id="clear-btn" onClick={handleClear}>Clear</button>
-      </div>
+      <Container className={classes.root} disableGutters>
+        <Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={show.done}
+                onChange={() => setShow({...show, done: !show.done})}
+                name="showDone"
+              />
+            }
+            label="Done"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={show.onProgress}
+                onChange={() => setShow({...show, onProgress: !show.onProgress})}
+                name="showOnProgress"
+                color="primary"
+              />
+            }
+            label="On Progress"
+          />
+        </Box>
+        <Button id="clear-btn" variant="contained" color="secondary" onClick={handleClear}>clear</Button>
+      </Container>
       {filterListToDo().map(item => (
-        <div key={item.id} className={`display-item ${item.done === true ? 'done' : ''}`}>
-          <div>
-            <strong>{item.content}</strong>
-            <p>{item.date}</p>
-          </div>
-          <input type="checkbox" name="toggle-done" checked={item.done} onChange={() => handleChangeDone(item.id)}/>
-        </div>
+        <Card key={item.id} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.5rem', margin: '1rem 0'}}>
+          <Box>
+            <Typography color={item.done ? "secondary" : "primary"}>{item.content}</Typography>
+            <Typography>{item.date}</Typography>
+          </Box>
+          <Checkbox checked={item.done} onChange={() => handleChangeDone(item.id)} name="toggle-done"/>
+        </Card>
       ))}
     </main>
   );

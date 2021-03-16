@@ -1,6 +1,26 @@
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import React from 'react';
 
-import Input from '../components/Input'
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'column',
+      width: '100%',
+      '& > div': {
+        margin: '0 0 .5rem',
+        width: '100%',
+      },
+      '& > button': {
+        alignSelf: 'flex-end',
+        width: '50%',
+      },
+    },
+  }),
+);
 
 type FormProps = {
   list: object[]
@@ -8,14 +28,9 @@ type FormProps = {
 }
 
 function Form({list, setList}: FormProps) {
+  const classes = useStyles();
   const [newToDo, setNewToDo] = React.useState('');
   const [date, setDate] = React.useState('');
-  const handleChangeToDo = (e: React.FormEvent<HTMLInputElement>): void => {
-    setNewToDo(e.currentTarget.value);
-  }
-  const handleChangeDate = (e: React.FormEvent<HTMLInputElement>): void => {
-    setDate(e.currentTarget.value);
-  }
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
@@ -26,10 +41,10 @@ function Form({list, setList}: FormProps) {
   
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input idText="todo" inputType="text" labelText="To Do" valueInput={newToDo} handleChange={handleChangeToDo}/>
-      <Input idText="date" inputType="date" labelText="Date" valueInput={date} handleChange={handleChangeDate}/>
-      <button type="submit">Add</button>
+    <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
+      <TextField id="todo" label="To Do" variant="outlined" value={newToDo} onChange={e => setNewToDo(e.target.value)} />
+      <TextField id="date" variant="outlined" type="date" value={date} onChange={e => setDate(e.target.value)} />
+      <Button variant="contained" color="primary" type="submit">add</Button>
     </form>
   );
 }
