@@ -1,26 +1,25 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import React from 'react';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'column',
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'column',
+    width: '100%',
+
+    '& > div': {
+      margin: '0 0 .5rem',
       width: '100%',
-      '& > div': {
-        margin: '0 0 .5rem',
-        width: '100%',
-      },
-      '& > button': {
-        alignSelf: 'flex-end',
-        width: '50%',
-      },
     },
-  }),
-);
+    '& > button': {
+      alignSelf: 'flex-end',
+      width: '50%',
+    },
+  }
+});
 
 type FormProps = {
   list: object[]
@@ -29,22 +28,24 @@ type FormProps = {
 
 function Form({list, setList}: FormProps) {
   const classes = useStyles();
+  const dateNow = JSON.stringify(new Date()).slice(1, 11);
   const [newToDo, setNewToDo] = React.useState('');
-  const [date, setDate] = React.useState('');
+  const [date, setDate] = React.useState(dateNow);
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    setList([...list, {id: Date.now(), content: newToDo, date, done: false}])
+    const [, m, d, y] = new Date(date).toString().split(' ');
+    setList([...list, {id: Date.now(), content: newToDo, date: `${d} ${m} ${y}`, done: false}])
     setNewToDo('');
-    setDate('');
+    setDate(dateNow);
   }
   
 
   return (
     <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
-      <TextField id="todo" label="To Do" variant="outlined" value={newToDo} onChange={e => setNewToDo(e.target.value)} />
-      <TextField id="date" variant="outlined" type="date" value={date} onChange={e => setDate(e.target.value)} />
-      <Button variant="contained" color="primary" type="submit">add</Button>
+      <TextField id="todo" label="To Do" variant="outlined" value={newToDo} onChange={e => setNewToDo(e.target.value)} required/>
+      <TextField id="date" label="Date" variant="outlined" type="date" value={date} onChange={e => setDate(e.target.value)} />
+      <Button variant="contained" color="primary" type="submit" disableElevation>add</Button>
     </form>
   );
 }

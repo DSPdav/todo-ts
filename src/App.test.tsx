@@ -1,14 +1,16 @@
 import React from 'react';
-import { getByTestId, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 import Form from './ui/Form'
 import userEvent from '@testing-library/user-event';
 
 test('<App /> render <Main/> and <Footer/>', () => {
   render(<App />);
-  const mainElement = screen.getByTestId('main');
+  const headerElement = screen.getByRole('heading');
+  expect(headerElement).toBeInTheDocument();
+  const mainElement = screen.getByRole('main');
   expect(mainElement).toBeInTheDocument();
-  const footerElement = screen.getByTestId('footer');
+  const footerElement = screen.getByText(/2021/);
   expect(footerElement).toBeInTheDocument();
 });
 
