@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import { FilterProps } from './types';
 
 const useStyles = makeStyles({
     container: {

@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import Form from './Form';
 import Display from './Display';
 import Filter from './Filter';
-import { ToDo } from './types';
 
 const useStyles = makeStyles({
   container: {

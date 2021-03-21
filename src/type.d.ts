@@ -1,24 +1,24 @@
-import React from 'react';
+type AuthContext = {}
 
-export type ToDo = {
+type ToDo = {
     id: string;
     content: string;
     date: string;
     done: boolean;
 }
 
-export type ShowFilter = {
+type ShowFilter = {
     done: boolean;
     onProgress: boolean;
 }
 
-export type FilterProps = {
+type FilterProps = {
     show: ShowFilter;
     setShow: React.Dispatch<React.SetStateAction<ShowFilter>>;
     handleClear: () => void;
 }
 
-export type DisplayProps = {
+type DisplayProps = {
     item: ToDo;
     handleChangeDone: (id: string) => void;
 }
