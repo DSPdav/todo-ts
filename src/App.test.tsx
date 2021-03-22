@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import Form from './ui/Form'
+import Form from './ui/components/Form';
 import userEvent from '@testing-library/user-event';
 
 test('<App /> render <Main/> and <Footer/>', () => {
@@ -16,7 +16,7 @@ test('<App /> render <Main/> and <Footer/>', () => {
 
 test('functionality of Form at <Main/>', async () => {
   const setState = jest.fn();
-  render(<Form list={[{}]} setList={setState}/>);
+  render(<Form list={[{id: 1234, content: 'Title To Do', date: '22 Mar 2021', done: false}]} setList={setState}/>);
   await userEvent.type(screen.getByRole('textbox'), 'Doing testing');
   expect(screen.getByRole('textbox')).toHaveValue('Doing testing');
   await userEvent.click(screen.getByRole('button'))

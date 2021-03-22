@@ -23,6 +23,7 @@ function Filter({ show, setShow, handleClear }: FilterProps) {
 
     return (
         <Container className={classes.container} disableGutters>
+            <Button id="clear-btn" variant="contained" color="secondary" onClick={handleClear} disableElevation>clear</Button>
             <Box>
             <FormControlLabel
                 control={
@@ -46,7 +47,6 @@ function Filter({ show, setShow, handleClear }: FilterProps) {
                 label="On Progress"
             />
             </Box>
-            <Button id="clear-btn" variant="contained" color="secondary" onClick={handleClear} disableElevation>clear</Button>
         </Container>
     );
 }

@@ -1,10 +1,15 @@
 type AuthContext = {}
 
 type ToDo = {
-    id: string;
+    id: number;
     content: string;
     date: string;
     done: boolean;
+}
+
+type FormProps = {
+    list: Array<ToDo>
+    setList: React.Dispatch<React.SetStateAction<Array<ToDo>>>
 }
 
 type ShowFilter = {
@@ -20,5 +25,5 @@ type FilterProps = {
 
 type DisplayProps = {
     item: ToDo;
-    handleChangeDone: (id: string) => void;
+    handleChangeDone: (id: number) => void;
 }

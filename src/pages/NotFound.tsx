@@ -10,11 +10,19 @@ const useStyles = makeStyles({
         margin: '0 auto',
         textAlign: 'center',
         
-        '& > p': {
-            position: 'absolute',
-            width: '100vw',
-            top: '50%',
-            transform: 'translateY(-50%)'
+    },
+    child: {
+        position: 'absolute',
+        width: '100vw',
+        top: '50%',
+        transform: 'translateY(-50%)',
+
+        '& > span': {
+            paddingRight: '0.5rem',
+            borderRight: '1px solid #444'
+        },
+        '& > b': {
+            paddingLeft: '0.5rem',
         }
     }
 });
@@ -25,7 +33,9 @@ function Login() {
 
     return (
         <div className={classes.root}>
-            <p>404 | Page Not Found</p>
+            <p className={classes.child}>
+                <span>404</span><b>Page Not Found</b>
+            </p>
         </div>
     );
 }

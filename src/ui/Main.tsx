@@ -2,9 +2,9 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Form from './Form';
-import Display from './Display';
-import Filter from './Filter';
+import Form from './components/Form';
+import Display from './components/Display';
+import Filter from './components/Filter';
 
 const useStyles = makeStyles({
   container: {
@@ -19,7 +19,7 @@ function Main() {
   const [listToDo, setListToDo] = React.useState(initialState);
   const [show, setShow] = React.useState({done: true, onProgress: true});
 
-  const handleChangeDone = (id: string) => {
+  const handleChangeDone = (id: number): void => {
     const newList = listToDo.map(item => {
       if (item.id === id) {
         return {...item, done: !item.done}
@@ -42,7 +42,7 @@ function Main() {
     }
   }
 
-  const handleClear = () => {
+  const handleClear = (): void => {
     const clearList = listToDo.filter(item => item.content === null);
     setListToDo(clearList);
   }
