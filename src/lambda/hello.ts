@@ -1,25 +1,21 @@
-import { Handler, Context, Callback, APIGatewayEvent } from 'aws-lambda';
+import { Context } from 'aws-lambda';
+import { table } from '../utils/Airtable'
 
-interface HelloResponse {
-    statusCode: number;
-    body: string;
+export async function handler(event: any, context: Context) {
+    try {
+        const records = await table.select({
+            maxRecords: 1,
+            view: "Grid view"
+        }).firstPage();
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify(records)
+        }
+    } catch (err) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ msg: err.message }) // Could be a custom message or object i.e. JSON.stringify(err)
+        };
+    }
 }
-
-const handler: Handler = (
-    event: APIGatewayEvent,
-    context: Context,
-    callback: Callback
-) => {
-    const params = event.queryStringParameters;
-    const response: HelloResponse = {
-        statusCode: 200,
-        body: JSON.stringify({
-            msg: `Hello from netlify lambda functions`,
-            params
-        })
-    };
-
-    callback(undefined, response);
-}
-
-export { handler }
